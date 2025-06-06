@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+    backend:
+        build:
+            context: ./backend
+            dockerfile: Dockerfile
+        container_name: cryptotracker-backend
+        ports:
+            - "8000:80"
+        volumes:
+            - ./backend:/var/www/html
+        networks:
+            - cryptotracker
+
+    frontend:
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile
+        container_name: cryptotracker-frontend
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./frontend:/app
+        depends_on:
+            - backend
+        networks:
+            - cryptotracker
+
+networks:
+    cryptotracker:
+        driver: bridge

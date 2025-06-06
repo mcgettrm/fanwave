@@ -1,0 +1,39 @@
+# Node (Nuxt)
+/frontend/node_modules
+/frontend/.output
+/frontend/.nuxt
+/frontend/.env
+/frontend/.vercel
+/frontend/.next
+/frontend/.cache
+/frontend/.eslintcache
+/frontend/package-lock.json
+
+# PHP (Laravel)
+/backend/vendor
+/backend/.env
+/backend/composer.lock
+/backend/storage/*.key
+/backend/storage/app/public
+/backend/storage/framework/*
+!/backend/storage/framework/.gitignore
+/backend/storage/logs/*
+!/backend/storage/logs/.gitignore
+/backend/bootstrap/cache/*
+!/backend/bootstrap/cache/.gitignore
+
+# Docker
+**/.env
+**/docker-compose.override.yml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor/IDE
+.vscode
+.idea
+*.swp
+
+# Logs
+*.log
