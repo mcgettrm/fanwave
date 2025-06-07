@@ -4,4 +4,11 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss'],
   srcDir: 'src/',
+  vite: {
+    server: {
+      watch: {
+        usePolling: true,
+      },
+    },
+  },
 })
