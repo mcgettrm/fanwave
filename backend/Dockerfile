@@ -25,9 +25,16 @@ WORKDIR /var/www/html
 # Copy existing application directory contents
 COPY . /var/www/html
 
-# Set permissions (if needed)
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
+# Find and replace the apache virtual host configuration to set the webroot to Laravel's public folder
+RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
 
-# Expose port 80 (Apache default)
+# Good 'ol 775  TODO::Need to review permissions here
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 775 /var/www/html
+
+
+
+# Expose port 80 (Apache default) TODO::SSL Cert on 8080?
 EXPOSE 80
+
+# TODO:: Different build targets for dev and prod?
