@@ -29,5 +29,5 @@ COPY --from=builder /app/.output .output
 # Expose port (Nuxt default)
 EXPOSE 3000
 
-# Start the app
-CMD ["node", ".output/server/index.mjs"]
+# Start the app TODO:: Build targets for dev and production
+CMD ["npm", "run", "dev"]
