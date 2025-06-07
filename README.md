@@ -9,6 +9,7 @@
 - Clone the git repository into your local system
 - Navigate to the root folder (the folder where this README is located)
 - Run `docker-compose up --detach` to build the images and launch the development environment
+  - Note: The first launch will take a few minutes while the images are built from scratch
 - (optional) if docker compose is unavailable, this MonoRepo consists of two separate sets of code, one for a nuxt application and another for a Laravel application. These can alternatively be booted individually per their respective documentation.
 
 ## Usage

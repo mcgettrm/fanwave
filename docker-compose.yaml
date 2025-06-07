@@ -13,6 +13,7 @@ services:
             - "8000:80"
         volumes:
             - ./backend/app:/var/www/html/app
+            - ./backend/resources:/var/www/html/app/resources
             - ./backend/routes:/var/www/html/routes
             - /var/www/html/vendor
         networks:
