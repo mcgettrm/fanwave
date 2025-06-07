@@ -22,6 +22,8 @@
 - Xdebug
 - PHPUnit
 - PHPStan
+- Swagger Documentation
+- Vitest
 
 ## Interesting
 - No Artisan on host machine due to PHP not being installed
