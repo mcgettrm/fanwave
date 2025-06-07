@@ -1,32 +1,17 @@
-# Stage 1: Build the application
-FROM node:20-alpine AS builder
+# Use Node.js base image
+FROM node:20-alpine
 
 # Set working directory
 WORKDIR /app
 
-# Install dependencies
+# Copy package files and install all deps (including dev)
 COPY package*.json ./
 RUN npm install
 
-# Copy application files
+# Copy app source
 COPY . .
 
-# Build the app
-RUN npm run build
-
-# Stage 2: Run the built application with a minimal image
-FROM node:20-alpine
-
-WORKDIR /app
-
-# Install production dependencies only
-COPY package*.json ./
-RUN npm install --omit=dev
-
-# Copy built files from builder
-COPY --from=builder /app/.output .output
-
-# Expose port (Nuxt default)
+# Expose Nuxt dev server port
 EXPOSE 3000
 
 # Start the app TODO:: Build targets for dev and production
