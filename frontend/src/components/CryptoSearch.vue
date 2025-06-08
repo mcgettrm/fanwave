@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col my-2">
         <label class="text-gray-700 " for="search-input">
-            Search for Crypto By Name Or Symbol
+            {{ label }}
         </label>
         <input id="search-input" v-model="currentInput" type="text"
             class="sm:max-w-60 shadow border p-1 rounded-bl rounded-tl" placeholder="Name or Symbol..."
@@ -19,7 +19,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
+import { ref, type Ref, reactive } from 'vue';;
 let currentInput = ref("");
 let searchResults = reactive([]);
 const onInput = async () => {
@@ -34,6 +34,10 @@ type SearchResult = {
     name: string,
 };
 
+let responseStatus: Ref<number> = ref(200);
+
+let label: Ref<string> = computed(() => (responseStatus.value === 429 ? "Rate limit exceeded. Please try again shortly." : "Search for Crypto By Name Or Symbol"));
+
 const onBlur = () => {
     setTimeout(() => {
         searchResults = [];
@@ -44,7 +48,9 @@ const updateResultsList = async () => {
     const url = `https://api.coingecko.com/api/v3/search?query=${encodeURIComponent(currentInput.value)}`;
     try {
         const res = await fetch(url);
+        responseStatus.value = res.status;
         const data: { coins: Array<SearchResult> } = await res.json();
+
         searchResults = data.coins;
     } catch {
         searchResults = [];
