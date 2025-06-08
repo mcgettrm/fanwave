@@ -1,11 +1,13 @@
 <template>
-    <div>
+
+    <body class="min-h-screen flex flex-col">
         <Header />
-        <main>
+        <main class="min-h-screen flex flex-col">
             <slot />
         </main>
         <Footer />
-    </div>
+    </body>
+
 </template>
 
 <script lang="ts" setup>
