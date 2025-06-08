@@ -11,7 +11,7 @@ class CoinGeckoAdaptor implements CryptoAdapterInterface
 
     private CONST COIN_GECKO_BASE_URL = 'https://api.coingecko.com/api/v3';
     private CONST MARKET_CAP_ENDPOINT = '/coins/markets?vs_currency=GBP';
-    private CONST DETAILS_ENDPOINT = '/coins/{id}?vs_currency=GBP';
+    private CONST DETAILS_ENDPOINT = '/coins/{currency_id}?vs_currency=GBP';
 
     public function __construct(private string $coinGeckoAPIKey = '')
     {
@@ -43,13 +43,20 @@ class CoinGeckoAdaptor implements CryptoAdapterInterface
         return $responseArray;
     }
 
-    public function getCurrencyDataById(int $currencyId): ?DetailedCurrencyDataItem {
-        $response = $this->sendRequest(self::DETAILS_ENDPOINT);
+    public function getCurrencyDataById(string $currencyId): ?DetailedCurrencyDataItem {
+        $response = $this->sendRequest(str_replace('{currency_id}',$currencyId, self::DETAILS_ENDPOINT));
         if($response->status() !== 200) {
             //TODO:: Logging
             return null;
         }
-        return new DetailedCurrencyDataItem();
+        $data = $response->json();
+        $currency = new DetailedCurrencyDataItem();
+        $currency->currencyName = $data['name'];
+        $currency->currencyId = $data['id'];
+        $currency->description = $data['description']['en'];
+        $currency->symbol = $data['symbol'];
+
+        return $currency;
     }
 
     private function sendRequest(string $path): \Illuminate\Http\Client\Response {

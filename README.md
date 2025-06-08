@@ -29,6 +29,7 @@
 - Vitest
 - Take another look at the permissions issue related to docker volumes overwriting `www-data` in the containers
 - PSR-12
+- Implement currency search feature
 
 ## AI Usage
 ### ChatGPT

@@ -33,7 +33,7 @@ class CryptoCurrencyController
         )->setStatusCode($statusCode);
     }
 
-    public function get(int $currencyId): \Illuminate\Http\JsonResponse {
+    public function get(string $currencyId): \Illuminate\Http\JsonResponse {
         //TODO::Validation? Can it be done in the router?
 
         //Generate an empty object response
@@ -44,6 +44,7 @@ class CryptoCurrencyController
             $statusCode = 200;
         } catch(\Exception $e) {
             //TODO::Logging? Observability?
+            echo $e->getMessage();
         }
 
         //TODO::Do I need to set the response content type header here?
