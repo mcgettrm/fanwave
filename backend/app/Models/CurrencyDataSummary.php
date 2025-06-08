@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-class CurrencyOverview
+class CurrencyDataSummary
 {
     public int $currencyId;
+
+    public int $currencyName;
 }

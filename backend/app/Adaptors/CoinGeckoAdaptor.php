@@ -2,10 +2,10 @@
 
 namespace App\Adaptors;
 
-use App\Models\CurrencyDataItem;
-use App\Models\CurrencyOverview;
+use App\Models\CurrencyDataSummary;
+use App\Models\DetailedCurrencyDataItem;
 
-class CoinGeckoAdaptor
+class CoinGeckoAdaptor implements \CryptoAdapterInterface
 {
 
     private CONST COIN_GECKO_BASE_URL = 'https://api.coingecko.com/api/v3';
@@ -20,17 +20,17 @@ class CoinGeckoAdaptor
     }
 
     /**
-     * @return array<CurrencyDataItem>
+     * @return array<CurrencyDataSummary>
      */
     public function getTopTen(): array{
         return [
-            new CurrencyDataItem(),
-            new CurrencyDataItem(),
-            new CurrencyDataItem()
+            new CurrencyDataSummary(),
+            new CurrencyDataSummary(),
+            new CurrencyDataSummary()
         ];
     }
 
-    public function getCurrencyDataById(int $currencyId): CurrencyOverview {
-        return new CurrencyOverview();
+    public function getCurrencyDataById(int $currencyId): DetailedCurrencyDataItem {
+        return new DetailedCurrencyDataItem();
     }
 }

@@ -28,6 +28,7 @@
 - Swagger Documentation
 - Vitest
 - Take another look at the permissions issue related to docker volumes overwriting `www-data` in the containers
+- PSR-12
 
 ## Interesting
 - No Artisan on host machine due to PHP not being installed
