@@ -6,12 +6,12 @@ use App\Models\CurrencyDataSummary;
 use App\Models\DetailedCurrencyDataItem;
 use Illuminate\Support\Facades\Http;
 
-class CoinGeckoAdaptor implements \CryptoAdapterInterface
+class CoinGeckoAdaptor implements CryptoAdapterInterface
 {
 
     private CONST COIN_GECKO_BASE_URL = 'https://api.coingecko.com/api/v3';
-    private CONST MARKET_CAP_ENDPOINT = '/coins/markets';
-    private CONST DETAILS_ENDPOINT = '/coins/{id}';
+    private CONST MARKET_CAP_ENDPOINT = '/coins/markets?vs_currency=GBP';
+    private CONST DETAILS_ENDPOINT = '/coins/{id}?vs_currency=GBP';
 
     public function __construct(private string $coinGeckoAPIKey = '')
     {
@@ -23,27 +23,41 @@ class CoinGeckoAdaptor implements \CryptoAdapterInterface
      */
     public function getTopTen(): array{
 
-        $response = $this->sendRequest(self::MARKET_CAP_ENDPOINT);
-        return [
-            new CurrencyDataSummary(),
-            new CurrencyDataSummary(),
-            new CurrencyDataSummary()
-        ];
+        $response = $this->sendRequest(self::MARKET_CAP_ENDPOINT . "&page=1&per_page=10");
+        if($response->status() !== 200){
+            //TODO:: Logging
+            return [];
+        }
+        $dataArray = $response->json();
+        $responseArray = [];
+
+        foreach($dataArray as $item){
+            $summary = new CurrencyDataSummary();
+            $summary->currencyId = $item['id'] ?? 0;
+            $summary->marketCap = $item['market_cap'] ?? 0;
+            $summary->rank = $item['market_cap_rank'] ?? 0;
+            $summary->currencyName = $item['name'] ?? 'Item not found';
+            $responseArray[] = $summary;
+        }
+
+        return $responseArray;
     }
 
-    public function getCurrencyDataById(int $currencyId): DetailedCurrencyDataItem {
-
+    public function getCurrencyDataById(int $currencyId): ?DetailedCurrencyDataItem {
         $response = $this->sendRequest(self::DETAILS_ENDPOINT);
+        if($response->status() !== 200) {
+            //TODO:: Logging
+            return null;
+        }
         return new DetailedCurrencyDataItem();
     }
 
     private function sendRequest(string $path): \Illuminate\Http\Client\Response {
 
-        $headers = [];
-
         if($this->coinGeckoAPIKey){
-            $headers['x-cg-pro-api-key'] = $this->coinGeckoAPIKey;
+            Http::withHeaders(['x-cg-pro-api-key'=>$this->coinGeckoAPIKey]);
         }
-         return Http::get(self::COIN_GECKO_BASE_URL."{$path}", $headers);
+
+         return Http::get(self::COIN_GECKO_BASE_URL."{$path}");
     }
 }

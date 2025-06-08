@@ -24,6 +24,7 @@ class CryptoCurrencyController
             $statusCode = 200;
         } catch(\Exception $e) {
             //TODO::Logging? Observability?
+            echo $e->getMessage();
         }
 
         //TODO::Do I need to set the respose content type header here?

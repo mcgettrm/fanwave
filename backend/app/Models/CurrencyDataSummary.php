@@ -4,7 +4,11 @@ namespace App\Models;
 
 class CurrencyDataSummary
 {
-    public int $currencyId;
+    public string $currencyId;
 
-    public int $currencyName;
+    public string $currencyName;
+
+    public int $marketCap;
+
+    public int $rank;
 }
