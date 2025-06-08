@@ -8,5 +8,8 @@ class DetailedCurrencyDataItem
     public string $currencyName;
     public string $symbol;
     public string $description;
+    public int $currentPrice;
+    public int $volume;
+    public int $marketCap;
 
 }

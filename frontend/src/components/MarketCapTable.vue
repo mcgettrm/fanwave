@@ -27,7 +27,7 @@
 </template>
 <script setup lang="ts">
 import type { CurrencyDataSummary } from '~/types/currency-data-summary';
-const props = defineProps<{
+defineProps<{
     currencyData: Array<CurrencyDataSummary>
 }>();
 </script>

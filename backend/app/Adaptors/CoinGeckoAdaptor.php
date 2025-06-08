@@ -55,6 +55,9 @@ class CoinGeckoAdaptor implements CryptoAdapterInterface
         $currency->currencyId = $data['id'];
         $currency->description = $data['description']['en'];
         $currency->symbol = $data['symbol'];
+        $currency->currentPrice = $data['market_data']['current_price']['gbp'];
+        $currency->marketCap = $data['market_data']['market_cap']['gbp'];
+        $currency->volume = $data['market_data']['total_volume']['gbp'];
 
         return $currency;
     }

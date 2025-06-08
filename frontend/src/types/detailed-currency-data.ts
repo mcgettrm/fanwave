@@ -3,4 +3,7 @@ export type DetailedCurrencyData = {
         currencyName: string,
         symbol: string,
         description: string,
+        volume: number,
+        currentPrice: number,
+        marketCap: number,
 };
