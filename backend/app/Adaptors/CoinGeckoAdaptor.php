@@ -4,6 +4,7 @@ namespace App\Adaptors;
 
 use App\Models\CurrencyDataSummary;
 use App\Models\DetailedCurrencyDataItem;
+use Illuminate\Support\Facades\Http;
 
 class CoinGeckoAdaptor implements \CryptoAdapterInterface
 {
@@ -14,15 +15,15 @@ class CoinGeckoAdaptor implements \CryptoAdapterInterface
 
     public function __construct(private string $coinGeckoAPIKey = '')
     {
-        if(!$this->coinGeckoAPIKey){
-            throw new \Exception('Please provide a CoinGecko API key to the application');
-        }
+
     }
 
     /**
      * @return array<CurrencyDataSummary>
      */
     public function getTopTen(): array{
+
+        $response = $this->sendRequest(self::MARKET_CAP_ENDPOINT);
         return [
             new CurrencyDataSummary(),
             new CurrencyDataSummary(),
@@ -31,6 +32,18 @@ class CoinGeckoAdaptor implements \CryptoAdapterInterface
     }
 
     public function getCurrencyDataById(int $currencyId): DetailedCurrencyDataItem {
+
+        $response = $this->sendRequest(self::DETAILS_ENDPOINT);
         return new DetailedCurrencyDataItem();
+    }
+
+    private function sendRequest(string $path): \Illuminate\Http\Client\Response {
+
+        $headers = [];
+
+        if($this->coinGeckoAPIKey){
+            $headers['x-cg-pro-api-key'] = $this->coinGeckoAPIKey;
+        }
+         return Http::get(self::COIN_GECKO_BASE_URL."{$path}", $headers);
     }
 }

@@ -30,6 +30,10 @@
 - Take another look at the permissions issue related to docker volumes overwriting `www-data` in the containers
 - PSR-12
 
+## AI Usage
+### ChatGPT
+Used for 'consultancy' - where I know what I am trying to achieve but not the syntax required to get me there. E.G: Initial Dockerfile outlines, how to do various things in Laravel etc etc. 
+
 ## Interesting
 - No Artisan on host machine due to PHP not being installed
 - Develop the API endpoints using postman? Depends if the responses are routed in Laravel based on `accepts` header (probably yes?)
