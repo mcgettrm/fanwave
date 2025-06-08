@@ -4,13 +4,16 @@
 ### Requirements
 - This app requires Docker Desktop to run
 - You will need the `docker-compose` command line utility
+- You will need a CoinGecko API key available from https://www.coingecko.com/en/developers/dashboard
 
 ### Booting the App
 - Clone the git repository into your local system
 - Navigate to the root folder (the folder where this README is located)
+- Copy the `/backend/.example.env` file to `/backend/.env` and add your API key to `COIN_GECKO_API_KEY` variable.
 - Run `docker-compose up --detach` to build the images and launch the development environment
   - Note: The first launch will take a few minutes while the images are built from scratch
-- (optional) if docker compose is unavailable, this MonoRepo consists of two separate sets of code, one for a nuxt application and another for a Laravel application. These can alternatively be booted individually per their respective documentation.
+- (optional / alternative) if docker compose is unavailable, this MonoRepo consists of two separate sets of code, one for a nuxt application and another for a Laravel application. These can alternatively be booted individually per their respective documentation.
+  - Note: You will need to provide the `.env` variables to the frameworks
 
 ## Usage
 
@@ -32,3 +35,6 @@
 ## Supporting Documentation
 ### CoinGecko Docs
 https://docs.coingecko.com/reference/introduction
+
+### Technical Task Brief
+The brief for this task can be found as a PDF in the `/docs` folder in the route of this project

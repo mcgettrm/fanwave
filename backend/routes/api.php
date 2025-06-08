@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+//TODO:: Would an OPTIONS endpoint add any value?
 Route::get('/', function () {
     return response()->json([
         '/summary'=>'For a list of the 10 largest cryptocurrencies ordered by market cap',
