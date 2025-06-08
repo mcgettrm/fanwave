@@ -1,0 +1,35 @@
+<template>
+    <div v-if="pending">
+        Loading currency data...
+    </div>
+    <div v-else-if="data">
+        <h1 class="mb-1 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
+            {{ data.currencyName }} Currency Data
+        </h1>
+        <h2 class="text-gray-500 mb-4">
+            Ticker: <span class="font-bold">{{ data.symbol }} </span>
+            |
+            ID: <span class="font-bold">{{ data.currencyId }}</span>
+        </h2>
+        <div class="text-gray-900">
+            {{ data.description }}
+        </div>
+    </div>
+    <div v-else>
+        We could not retrieve the currency data for that ticker.
+    </div>
+</template>
+<script setup lang="ts">
+import type { DetailedCurrencyData } from '~/types/detailed-currency-data';
+let route = useRoute();
+let currencyId = route.params.id;
+useHead({
+    title: `${currencyId} Detail`,
+});
+
+const secondLevelDomain = process.server
+    ? `backend:80`
+    : `localhost:8000`;
+
+const { data, pending, error } = await useAsyncData<DetailedCurrencyData>('currencyData', () => $fetch(`http://${secondLevelDomain}/api/currency-data/${currencyId}`));
+</script>

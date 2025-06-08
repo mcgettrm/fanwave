@@ -17,7 +17,7 @@
                 <td class="border-b border-gray-300 hover:bg-gray-50">{{ `£${item.marketCap}` }}</td>
                 <td>
                     <NuxtLink class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-                        :to="{ name: 'currency', params: { currencyId: item.currencyId } }">
+                        :to="`/currency/${item.currencyId}`">
                         More
                     </NuxtLink>
                 </td>
