@@ -23,12 +23,9 @@ const secondLevelDomain = process.server
     ? `backend:80`
     : `localhost:8000`;
 
-const route = useRoute();
 
 const { data, pending, error } = await useAsyncData<Array<CurrencyDataSummary>>(
-    'summaryData', () => $fetch(`http://${secondLevelDomain}/api/summary`),
-    {
-        watch: [() => route.fullPath],
-    }
+    'summaryData', () => $fetch(`http://${secondLevelDomain}/api/summary`)
 );
+
 </script>

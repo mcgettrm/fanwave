@@ -43,9 +43,9 @@
 <script setup lang="ts">
 import type { DetailedCurrencyData } from '~/types/detailed-currency-data';
 let route = useRoute();
-let currencyId = route.params.id;
+let currencyId = computed(() => route.params.id);
 useHead({
-    title: `${currencyId} Detail`,
+    title: `${currencyId.value} Detail`,
 });
 
 const secondLevelDomain = process.server
@@ -53,9 +53,10 @@ const secondLevelDomain = process.server
     : `localhost:8000`;
 
 const { data, pending, error } = await useAsyncData<DetailedCurrencyData>(
-    'currencyData', () => $fetch(`http://${secondLevelDomain}/api/currency-data/${currencyId}`),
+    `currencyData${currencyId.value}`, () => $fetch(`http://${secondLevelDomain}/api/currency-data/${currencyId.value}`),
     {
-        watch: [() => route.fullPath],
+        watch: [currencyId], // 👈 this automatically triggers a refetch!
+        initialCache: false, // optional: avoids stale reuse
     }
 );
 </script>
