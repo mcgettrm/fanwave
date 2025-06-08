@@ -10,7 +10,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(item, index) in cryptoData" :key="index">
+            <tr v-for="(item, index) in currencyData" :key="index">
                 <td class="border-b border-gray-300 hover:bg-gray-50">{{ item.rank }}</td>
                 <td class="border-b border-gray-300 hover:bg-gray-50">{{ item.currencyId }}</td>
                 <td class="border-b border-gray-300 hover:bg-gray-50">{{ item.currencyName }}</td>
@@ -26,17 +26,8 @@
     </table>
 </template>
 <script setup lang="ts">
-type CurrencyDataSummary = {
-    currencyId: string,
-    currencyName: string,
-    marketCap: number,
-    rank: number,
-}
-
-let cryptoData: Array<CurrencyDataSummary> = [{
-    currencyId: 'bitcoin',
-    currencyName: 'Bitcoin',
-    marketCap: 10000,
-    rank: 1
-}];
+import type { CurrencyDataSummary } from '~/types/currency-data-summary';
+const props = defineProps<{
+    currencyData: Array<CurrencyDataSummary>
+}>();
 </script>

@@ -1,19 +1,17 @@
 <template>
-
-    <body class="min-h-screen flex flex-col">
+    <div class="min-h-screen flex flex-col">
         <Header />
-        <main class="min-h-screen flex flex-col">
+        <main class="flex-1">
             <slot />
         </main>
         <Footer />
-    </body>
-
+    </div>
 </template>
 
 <script lang="ts" setup>
-// You can import components, composables, etc.
-import Header from '~/components/SiteHeader.vue'
-import Footer from '~/components/SiteFooter.vue'
+import Header from '~/components/SiteHeader.vue';
+import Footer from '~/components/SiteFooter.vue';
+
 </script>
 
 <style scoped>
