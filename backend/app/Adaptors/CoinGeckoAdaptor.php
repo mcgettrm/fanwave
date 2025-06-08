@@ -47,7 +47,7 @@ class CoinGeckoAdaptor implements CryptoAdapterInterface
 
     public function getCurrencyDataById(string $currencyId): ?DetailedCurrencyDataItem {
 
-        return Cache::remember('currency'.$currencyId, 600, function ($currencyId) {
+        return Cache::remember('currency'.$currencyId, 600, function () use ($currencyId) {
             $response = $this->sendRequest(str_replace('{currency_id}', $currencyId, self::DETAILS_ENDPOINT));
             if ($response->status() !== 200) {
                 //TODO:: Logging
