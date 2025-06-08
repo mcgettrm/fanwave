@@ -2,11 +2,11 @@
     <table class="border border-gray-300 bg-gray-100 table-auto p-1 text-center">
         <thead>
             <tr>
-                <th class="border-b border-gray-300">Rank</th>
-                <th class="border-b border-gray-300">ID</th>
-                <th class="border-b border-gray-300">Name</th>
-                <th class="border-b border-gray-300">Market Cap</th>
-                <th class="border-b border-gray-300">Details</th>
+                <th class="p-1 border-b border-gray-300">Rank</th>
+                <th class="p-1 border-b border-gray-300">ID</th>
+                <th class="p-1 border-b border-gray-300">Name</th>
+                <th class="p-1 border-b border-gray-300">Market Cap</th>
+                <th class="p-1 border-b border-gray-300">Details</th>
             </tr>
         </thead>
         <tbody>
@@ -15,7 +15,7 @@
                 <td class="border-b border-gray-300 hover:bg-gray-50">{{ item.currencyId }}</td>
                 <td class="border-b border-gray-300 hover:bg-gray-50">{{ item.currencyName }}</td>
                 <td class="border-b border-gray-300 hover:bg-gray-50">{{ `£${item.marketCap}` }}</td>
-                <td>
+                <td class="p-1">
                     <NuxtLink class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
                         :to="`/currency/${item.currencyId}`">
                         More

@@ -13,8 +13,8 @@
                 ID: <span class="font-bold">{{ data.currencyId }}</span>
             </h2>
             <div class="sm:flex gap-4 max-w-full">
-                <div class="text-gray-900 whitespace-pre-wrap">
-                    {{ data.description }}
+                <div class="text-gray-900 whitespace-pre-wrap min-w-7/10">
+                    {{ data.description ?? 'No Description is available' }}
                 </div>
                 <div class="border border-gray-300 rounded-2xl p-3 text-sm min-w-2/10 gap-2">
                     <h2 class="text-2xl text-center mb-4">Insights</h2>
