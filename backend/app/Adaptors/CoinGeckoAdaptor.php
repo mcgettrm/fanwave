@@ -12,6 +12,13 @@ class CoinGeckoAdaptor
     private CONST MARKET_CAP_ENDPOINT = '/coins/markets';
     private CONST DETAILS_ENDPOINT = '/coins/{id}';
 
+    public function __construct(private string $coinGeckoAPIKey = '')
+    {
+        if(!$this->coinGeckoAPIKey){
+            throw new \Exception('Please provide a CoinGecko API key to the application');
+        }
+    }
+
     /**
      * @return array<CurrencyDataItem>
      */
